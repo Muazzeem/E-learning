@@ -19,7 +19,7 @@ function FailurePage() {
                                 </p>
                                 <span>OR</span> <br/>
                                 <p className="contact-text"><a href="mailto:muazzem.mamun@gmail.com?cc=mr.saiful.azad@gmail.comsubject=Payment%failed"><u>Contact Us</u></a></p>
-                                <a href="/" type="button" className="btn btn-danger w-auto me-2 mt-4">Back to home</a>
+                                <a href="/" type="button" className="btn return-btn btn-danger w-auto me-2 mt-4">Back to home</a>
                             </div>
                         </div>
                     </div>

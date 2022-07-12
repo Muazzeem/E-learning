@@ -18,7 +18,7 @@ function SuccessPage() {
                                     payment is now pending.
                                     We will confirm you bia your providing email address.
                                 </p>
-                                <a href="/" type="button" className="btn btn-success w-auto me-2 mt-4">Back to home</a>
+                                <a href="/" type="button" className="btn return-btn btn-success w-auto me-2 mt-4">Back to home</a>
                             </div>
                         </div>
                     </div>

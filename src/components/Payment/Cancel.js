@@ -17,7 +17,7 @@ function CancelPage() {
                                 <p className="dis-text">
                                     Payment has been canceled and will not be charged.
                                 </p>
-                                <a href="/" type="button" className="btn btn-danger w-auto me-2 mt-4">Back to home</a>
+                                <a href="/" type="button" className="btn return-btn btn-danger w-auto me-2 mt-4">Back to home</a>
                             </div>
                         </div>
                     </div>
