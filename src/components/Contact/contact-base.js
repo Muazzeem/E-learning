@@ -35,6 +35,8 @@ function ContactBase() {
     const [emailErr, setEmailErr] = useState('')
     const [phoneErr, setPhoneErr] = useState('')
     const [disable, setDisable] = React.useState(false);
+    const areAllFieldsFilled = (name !== "") && (email !== "") && (phone !== "")
+
 
 // onChange function
 
@@ -156,7 +158,7 @@ function ContactBase() {
                                     {phone.length > 1 ? "" : <p className='errormsg'>{phoneErr}</p>}
                                 </div>
                                 <div className="col-md-12 text-center">
-                                    <button disabled={disable} type="submit" id="enroll-button"
+                                    <button hidden={!areAllFieldsFilled} disabled={disable} type="submit" id="enroll-button"
                                             className="btn btn-primary mt-3 reg-form-submit-btn">রেজিস্ট্রেশন
                                         করুন
                                     </button>

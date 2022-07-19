@@ -6,6 +6,7 @@ import Content from "../Content/content";
 import Contact2 from "../Contact/contact2";
 import React, {useState} from 'react';
 import axios from "axios";
+import BkashPayment from "../Contact/bkash-payment";
 
 
 function HomePage() {
@@ -14,27 +15,6 @@ function HomePage() {
         const scrolled = window.scrollY
         setSize(scrolled)
     })
-    const data = {
-        "payerReference": " "
-    }
-    const [load, setLoad] = React.useState(false);
-
-    function handleClick() {
-        axios.post('https://p903lgfgy3.execute-api.ap-southeast-1.amazonaws.com/dev/create-payment', data, {headers: {"Content-Type": "application/json"}}).then(
-            res => {
-                console.log(res['data']['bkashURL'])
-                if (res.status === 200) {
-                    window.open(res['data']['bkashURL']);
-                } else {
-                    throw new Error("Server can't be reached!")
-                }
-                setLoad(false)
-            }
-        ).catch((error) => {
-            console.log(error)
-        })
-
-    }
 
     return (<div className="container-fluid">
         <div className="home">
@@ -61,13 +41,7 @@ function HomePage() {
                                           playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                         </div>
                         <div className={size > 210 ? "about" : "bla"}>
-                            <button disabled={load} onClick={() => {
-                                setLoad(true);
-                                handleClick();
-                            }} type="button"
-                                    className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2"> রেজিস্ট্রেশন
-                                করুন
-                            </button>
+                            <BkashPayment/>
                         </div>
                         <div className="bg-white sort-details p-4">
                             <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
@@ -136,13 +110,7 @@ function HomePage() {
                                       playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                     </div>
                     <div className="bg-white">
-                        <button disabled={load} onClick={() => {
-                            setLoad(true);
-                            handleClick();
-                        }} type="button"
-                                className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
-                            রেজিস্ট্রেশন
-                        </button>
+                        <BkashPayment/>
                     </div>
                     <div className="bg-white details">
                         <div className="bg-white p-4">
@@ -182,13 +150,7 @@ function HomePage() {
         <Contact2/>
         <div className={size < 210 ? "about" : "bla"}>
             <div className="fixed-bottom bottom-contact">
-                <button disabled={load} onClick={() => {
-                    setLoad(true);
-                    handleClick();
-                }} type="button" className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal3">
-                    রেজিস্ট্রেশন করুন
-                </button>
+                <BkashPayment/>
             </div>
         </div>
     </div>);
