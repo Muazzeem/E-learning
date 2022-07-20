@@ -4,9 +4,9 @@ import Teacher from "./teacher";
 import Course from "../Course/course";
 import Content from "../Content/content";
 import Contact2 from "../Contact/contact2";
+import PopUpContact from "../Contact/pop-up-contact";
 import React, {useState} from 'react';
-import axios from "axios";
-import BkashPayment from "../Contact/bkash-payment";
+import ContactBase from "../Contact/contact-base";
 
 
 function HomePage() {
@@ -41,7 +41,7 @@ function HomePage() {
                                           playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                         </div>
                         <div className={size > 210 ? "about" : "bla"}>
-                            <BkashPayment/>
+                            <PopUpContact/>
                         </div>
                         <div className="bg-white sort-details p-4">
                             <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
@@ -110,7 +110,10 @@ function HomePage() {
                                       playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                     </div>
                     <div className="bg-white">
-                        <BkashPayment/>
+                        <button type="button" className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2"
+                                data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                            রেজিস্ট্রেশন
+                        </button>
                     </div>
                     <div className="bg-white details">
                         <div className="bg-white p-4">
@@ -148,9 +151,29 @@ function HomePage() {
             <Teacher/>
         </div>
         <Contact2/>
+        <div className="modal fade" id="exampleModal3" tabIndex="-1" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="exampleModalLabel">রেজিস্ট্রেশন</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <div className="contact-modal-body modal-body">
+                            <ContactBase/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div className={size < 210 ? "about" : "bla"}>
             <div className="fixed-bottom bottom-contact">
-                <BkashPayment/>
+                <button type="button" className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2"
+                        data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                    রেজিস্ট্রেশন করুন
+                </button>
             </div>
         </div>
     </div>);

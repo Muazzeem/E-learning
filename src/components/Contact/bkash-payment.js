@@ -3,27 +3,7 @@ import axios from "axios";
 import {DotLoader} from "react-spinners";
 
 function BkashPayment() {
-    const data = {
-        "payerReference": " "
-    }
-    const [load, setLoad] = React.useState(false);
 
-    function handleClick() {
-        axios.post('https://p903lgfgy3.execute-api.ap-southeast-1.amazonaws.com/dev/create-payment', data, {headers: {"Content-Type": "application/json"}}).then(
-            res => {
-                console.log(res['data']['bkashURL'])
-                if (res.status === 200) {
-                    window.open(res['data']['bkashURL']);
-                } else {
-                    throw new Error("Server can't be reached!")
-                }
-                setLoad(false)
-            }
-        ).catch((error) => {
-            console.log(error)
-        })
-
-    }
 
     return (
         <div>

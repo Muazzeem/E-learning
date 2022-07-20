@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
-import Swal from "sweetalert2";
+import axios from "axios";
+import {DotLoader} from "react-spinners";
 
 const SITE_KEY = "6LetAmYeAAAAAPVdEy3rzYYohRzIU5Nr6FHvKCNQ";
 
@@ -34,8 +35,29 @@ function ContactBase() {
     const [nameErr, setNameErr] = useState('')
     const [emailErr, setEmailErr] = useState('')
     const [phoneErr, setPhoneErr] = useState('')
-    const [disable, setDisable] = React.useState(false);
+    const [load, setLoad] = React.useState(false);
     const areAllFieldsFilled = (name !== "") && (email !== "") && (phone !== "")
+
+
+    const data = {
+        "payerReference": " "
+    }
+
+    function handleClick() {
+        axios.post('https://p903lgfgy3.execute-api.ap-southeast-1.amazonaws.com/dev/create-payment', data, {headers: {"Content-Type": "application/json"}}).then(
+            res => {
+                console.log(res['data']['bkashURL'])
+                if (res.status === 200) {
+                    // window.open(res['data']['bkashURL']);
+                } else {
+                    throw new Error("Server can't be reached!")
+                }
+                setLoad(false)
+            }
+        ).catch((error) => {
+            console.log(error)
+        })
+    }
 
 
 // onChange function
@@ -58,7 +80,7 @@ function ContactBase() {
         if (typeof window !== "undefined") {
             if (window.fbq != null) {
                 console.warn("Purchase")
-                window.fbq('track', 'Purchase', {currency: "BDT", value: 1000});
+                window.fbq('track', 'Purchase', {currency: "BDT", value: 3000});
             }
         }
     }
@@ -79,32 +101,33 @@ function ContactBase() {
             setPhoneErr(' phone is required!')
         }
         window.grecaptcha.ready(() => {
-            setDisable(true)
+            setLoad(true)
             window.grecaptcha.execute(SITE_KEY, {action: 'submit'}).then(token => {
                 console.log(token);
-                setDisable(false)
+                setLoad(false)
                 if (name.length > 1 && email.length > 1 && phone.length > 1) {
                     const form = {
                         name, email, phone, token
                     }
-                    setDisable(true)
+                    setLoad(true)
                     const Swal = require('sweetalert2')
                     const axios = require('axios').default;
-                    axios.post(url, form)
-                        .then(res => {
-                            console.log(res.status)
-                            if (res.status === 200) {
-                                setName("");
-                                setEmail("");
-                                setPhone("");
-                                Swal.fire({
-                                    icon: '',
-                                    text: 'আপনার দেওয়া ইমেইল এ payment কিভাবে করবেন জানানো হয়েছে । দয়া করে আপনার ইমেইল এর ইনবক্স / স্প্যাম বক্স দেখুন ।',
-                                });
-                                onClick();
-                                setDisable(false)
-                            }
-                        })
+                    handleClick();
+                    // axios.post(url, form)
+                    //     .then(res => {
+                    //         console.log(res.status)
+                    //         if (res.status === 200) {
+                    //             setName("");
+                    //             setEmail("");
+                    //             setPhone("");
+                    //             Swal.fire({
+                    //                 icon: '',
+                    //                 text: 'আপনার দেওয়া ইমেইল এ payment কিভাবে করবেন জানানো হয়েছে । দয়া করে আপনার ইমেইল এর ইনবক্স / স্প্যাম বক্স দেখুন ।',
+                    //             });
+                    //             onClick();
+                    //             setLoad(false)
+                    //         }
+                    //     })
                 }
 
             });
@@ -158,10 +181,24 @@ function ContactBase() {
                                     {phone.length > 1 ? "" : <p className='errormsg'>{phoneErr}</p>}
                                 </div>
                                 <div className="col-md-12 text-center">
-                                    <button hidden={!areAllFieldsFilled} disabled={disable} type="submit" id="enroll-button"
-                                            className="btn btn-primary mt-3 reg-form-submit-btn">রেজিস্ট্রেশন
-                                        করুন
-                                    </button>
+                                    <div>
+                                        <div className="d-flex justify-content-center">
+                                            <div className="text-center">
+                                                <DotLoader
+                                                    color="#4207eb"
+                                                    loading={load}
+                                                    size={80}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button hidden={!areAllFieldsFilled || load} type="submit"
+                                                id="enroll-button"
+                                                className="btn btn-primary mt-3 reg-form-submit-btn">রেজিস্ট্রেশন
+                                            করুন
+                                        </button>
+                                    </div>
                                 </div>
 
                             </form>
