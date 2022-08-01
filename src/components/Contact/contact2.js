@@ -1,12 +1,16 @@
 import './contact2.css'
 import ContactBase from "./contact-base";
+import React from "react";
 
 function Contact2() {
     return (<div>
         <div className="contact-card">
-            <div className="row justify-content-center">
-                <div className="col-lg-9">
+            <div className="justify-content-center">
+                <div className="">
                     <div className="card main-card shadow bg-white">
+                        <div className="text-right step-number position-absolute top-0 end-0">
+                            <span className="badge badge-primary">Step: 1</span>
+                        </div>
                         <div className="row">
                             <div className="col-lg-6 col-sm-12 sm-player">
                                 <div className="contact-from p-lg-5 p-4">
@@ -14,8 +18,8 @@ function Contact2() {
                                     <ContactBase/>
                                 </div>
                             </div>
-                            <div className="col-lg-6 col-sm-12">
-                                <div className="p-lg-5 p-4">
+                            <div className="col-lg-6 col-sm-12 lg-contact-card">
+                                <div className="paddin-lg-5 p-4">
                                     <h3>আমাদের সাথে যোগাযোগ করুন</h3>
                                     <div className="info mt-4">
                                         <div className="information">

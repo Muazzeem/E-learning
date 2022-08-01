@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import SuccessPage from "./components/Payment/Success";
 import FailurePage from "./components/Payment/Failure";
 import CancelPage from "./components/Payment/Cancel";
+import CreatePayment from "./components/Payment/create-payment";
 
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
                     </Route>
                     <Route exact path="/cancel">
                         <CancelPage/>
+                    </Route>
+                    <Route exact path="/create-payment">
+                        <CreatePayment/>
                     </Route>
                 </Switch>
             </Router>

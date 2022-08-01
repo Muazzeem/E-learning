@@ -4,7 +4,7 @@
 }
 
 .main-card {
-    border-radius: 20px;
+    border-radius: 10px;
 }
 
 .contact-from {
@@ -67,4 +67,14 @@ a {
 
 .swal2-popup {
     width: 38em !important;
+}
+@media screen and (max-width: 991px) {
+    .lg-contact-card{
+        display: none;
+    }
+}
+@media (min-width: 1400px){
+    .paddin-lg-5{
+        padding: 3rem;
+    }
 }
