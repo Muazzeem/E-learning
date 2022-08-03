@@ -14,7 +14,7 @@ function Contact2() {
                         <div className="row">
                             <div className="col-lg-6 col-sm-12 sm-player">
                                 <div className="contact-from p-lg-5 p-4">
-                                    <h3>রেজিস্ট্রেশন</h3>
+                                    <h3>রেজিস্ট্রেশন করুন</h3>
                                     <ContactBase/>
                                 </div>
                             </div>

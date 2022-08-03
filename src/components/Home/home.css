@@ -45,6 +45,10 @@
     margin-left: 2rem;
 }
 
+.lg-device {
+    margin-bottom: 5rem;
+}
+
 @media (max-width: 991px) {
     .video-player {
         display: none;
@@ -86,7 +90,8 @@
     .bottom-contact {
         display: none;
     }
-    .contact-card{
+
+    .contact-card {
         margin-bottom: 3rem;
     }
 }

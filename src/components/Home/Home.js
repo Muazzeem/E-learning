@@ -3,8 +3,8 @@ import '@justinribeiro/lite-youtube';
 import Teacher from "./teacher";
 import Course from "../Course/course";
 import Content from "../Content/content";
-import PopUpContact from "../Contact/pop-up-contact";
 import React, {useState} from 'react';
+import {BkashPayment} from "../Contact/bkash-payment";
 
 
 function HomePage() {
@@ -39,7 +39,7 @@ function HomePage() {
                                           playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                         </div>
                         <div className={size > 210 ? "about" : "bla"}>
-                            <PopUpContact/>
+                            <button className="btn" id="bKash_button">Pay with bKash</button>
                         </div>
                         <div className="bg-white sort-details p-4">
                             <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
@@ -108,9 +108,7 @@ function HomePage() {
                                       playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                     </div>
                     <div className="bg-white">
-                        <a href="create-payment" type="button" className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
-                            রেজিস্ট্রেশন
-                        </a>
+                        {/*<BkashPayment/>*/}
                     </div>
                     <div className="bg-white details">
                         <div className="bg-white p-4">
@@ -144,15 +142,15 @@ function HomePage() {
         <div className="sm-device">
             <Content/>
         </div>
-        <div className="lg-device mt-5">
+        <div className="lg-device lg-device-teacher mt-5">
             <Teacher/>
         </div>
         <div className={size < 210 ? "about" : "bla"}>
             <div className="fixed-bottom bottom-contact">
-                <button type="button" className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal3">
+                <a href="create-payment" type="button"
+                   className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
                     রেজিস্ট্রেশন করুন
-                </button>
+                </a>
             </div>
         </div>
     </div>);
