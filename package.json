@@ -10,7 +10,7 @@
     "axios": "^0.25.0",
     "cdbreact": "^1.5.3",
     "lite-youtube-embed": "^0.2.0",
-    "react": "^17.0.2",
+    "react": "^18.2.0",
     "react-bkash": "^3.0.0",
     "react-dom": "^17.0.2",
     "react-modal-video": "^1.2.8",
