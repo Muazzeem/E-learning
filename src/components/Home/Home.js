@@ -4,7 +4,7 @@ import Teacher from "./teacher";
 import Course from "../Course/course";
 import Content from "../Content/content";
 import React, {useState} from 'react';
-import {BkashPayment} from "../Contact/bkash-payment";
+import Checkout from "./CreatePayment";
 
 
 function HomePage() {
@@ -108,7 +108,7 @@ function HomePage() {
                                       playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                     </div>
                     <div className="bg-white">
-                        {/*<BkashPayment/>*/}
+                        <Checkout/>
                     </div>
                     <div className="bg-white details">
                         <div className="bg-white p-4">

@@ -28,7 +28,7 @@ function ContactBase() {
             console.log("Script loaded!");
         });
     }, []);
-    const url = "https://g9tasxr6hg.execute-api.ap-southeast-1.amazonaws.com/dev/save-contact"
+    const url = "https://api.learning.fractalslab.com/crm/save-contact"
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
