@@ -4,103 +4,122 @@ import Teacher from "./teacher";
 import Course from "../Course/course";
 import Content from "../Content/content";
 import React, {useState} from 'react';
-import { useBkash } from 'react-bkash';
+
+
 function HomePage() {
-   const { error, loading, triggerBkash } = useBkash({
-		onSuccess: (data) => {
-			console.log(data); // this contains data from api response from onExecutePayment
-		},
-		onClose: () => {
-			console.log('Bkash iFrame closed');
-		},
-		bkashScriptURL: 'https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
-		amount: 1000,
-		onCreatePayment: async (paymentRequest) => {
-			// call your API with the payment request here
-			return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/create-payment', {
-				method: 'POST',
-				body: JSON.stringify(paymentRequest),
-			}).then((res) => res.json());
-
-			// must return the following object:
-			// {
-			// 	paymentID: string;
-			// 	createTime: string;
-			// 	orgLogo: string;
-			// 	orgName: string;
-			// 	transactionStatus: string;
-			// 	amount: string;
-			// 	currency: string;
-			// 	intent: string;
-			// 	merchantInvoiceNumber: string;
-			// }
-		},
-		onExecutePayment: async (paymentID) => {
-			// call your executePayment API here
-			return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/execute-payment', {
-				method: 'POST',
-			}).then((res) => res.json());
-
-			// it doesn't matter what you return here, any errors thrown here will be available on error return value of the useBkash hook
-		},
-	});
-
-	const [size, setSize] = useState()
+    const [size, setSize] = useState()
     window.addEventListener('scroll', () => {
         const scrolled = window.scrollY
         setSize(scrolled)
     })
 
     return (<div className="container-fluid">
-        <div className="home">
-            <div className="row d-flex justify-content-between">
-                <div className="col-lg-6 col-sm-12">
-                    <div className="about">
-                        <h1>ভূমিকা</h1>
-                        <p>
-                            কেমন হবে আপনি যদি আপনার ওয়েবসাইট এর জন্য ফ্রি REST API ব্যবহার করতে পারেন? আপনাকে প্রতি
-                            মাসে, একটি নির্দিষ্ট সীমা পর্যন্ত, সার্ভার ও
-                            ডাটাবেসের জন্য গুনতে হবে না কোনো টাকা আজীবনের জন্য। হ্যাঁ, আপনি ঠিকই পড়েছেন। এই কোর্সে আপনি
-                            এমন কিছু
-                            টেকনোলজি নিয়ে জানবেন।আপনি যে ওয়েবসাইটে ভিজিট করছেন সেটিও একটি সার্ভারলেস ওয়েবসাইট। আমাদের
-                            এই কোর্সের
-                            মাধ্যমে আপনিও এমন ওয়েবসাইট তৈরি করতে পারবেন একদম বিনামূল্যে। আপনি যদি অল্প কিছু প্রোগ্রামিং
-                            জানেন যেমন:
-                            python3.8, node.js তাহলে আপনিও হতে পারবেন ভালো একজন ব্যাকএন্ড ডেভেলপার। আমরা আছি আপনার
-                            ক্যারিয়ারের পথে।
-                        </p>
+            <div className="home">
+                <div className="row d-flex justify-content-between">
+                    <div className="col-lg-6 col-sm-12">
+                        <div className="about">
+                            <h1>ভূমিকা</h1>
+                            <p>
+                                কেমন হবে আপনি যদি আপনার ওয়েবসাইট এর জন্য ফ্রি REST API ব্যবহার করতে পারেন? আপনাকে প্রতি
+                                মাসে, একটি নির্দিষ্ট সীমা পর্যন্ত, সার্ভার ও
+                                ডাটাবেসের জন্য গুনতে হবে না কোনো টাকা আজীবনের জন্য। হ্যাঁ, আপনি ঠিকই পড়েছেন। এই কোর্সে
+                                আপনি
+                                এমন কিছু
+                                টেকনোলজি নিয়ে জানবেন।আপনি যে ওয়েবসাইটে ভিজিট করছেন সেটিও একটি সার্ভারলেস ওয়েবসাইট।
+                                আমাদের
+                                এই কোর্সের
+                                মাধ্যমে আপনিও এমন ওয়েবসাইট তৈরি করতে পারবেন একদম বিনামূল্যে। আপনি যদি অল্প কিছু
+                                প্রোগ্রামিং
+                                জানেন যেমন:
+                                python3.8, node.js তাহলে আপনিও হতে পারবেন ভালো একজন ব্যাকএন্ড ডেভেলপার। আমরা আছি আপনার
+                                ক্যারিয়ারের পথে।
+                            </p>
+                        </div>
+                        <div className="sm-player">
+                            <div className='player-wrapper bg-white mt-sm-5'>
+                                <lite-youtube videoid="-7Fd585bFr8"
+                                              playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
+                            </div>
+                            <div className={size > 210 ? "payment-button" : "bla"}>
+                                <a href="create-payment"
+                                   className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
+                                    এনরোল করুন
+                                </a>
+                            </div>
+                            <div className="bg-white sort-details p-4">
+                                <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
+                                    লেকচার
+                                </div>
+                                <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
+                                    সেশন
+                                </div>
+                                <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
+                                    সময়সীমা
+                                </div>
+                                <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন
+                                    ভিত্তিক
+                                    ক্লাস (Google Meet)
+                                </div>
+                                <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর
+                                    সেশনের
+                                    জন্য ৩০ মিনিট
+                                </div>
+                                {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
+                                {/*    ২০২২*/}
+                                {/*</div>*/}
+                                <div className="mt-3">
+                                    <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span> <br/>
+                                    <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
+                                </div>
+                            </div>
+                            <div className="bg-white details">
+                                <div className="bg-white p-4">
+                                    <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
+                                        লেকচার
+                                    </div>
+                                    <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
+                                        সেশন
+                                    </div>
+                                    <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
+                                        সময়সীমা
+                                    </div>
+                                    <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন
+                                        ভিত্তিক
+                                        ক্লাস (Google Meet)
+                                    </div>
+                                    <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর
+                                        সেশনের
+                                        জন্য ৩০ মিনিট
+                                    </div>
+                                    {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে*/}
+                                    {/*    জুন ২০২২*/}
+                                    {/*</div>*/}
+                                    <div className="mt-3">
+                                        <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span>
+                                        <br/>
+                                        <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="sm-device">
+                            <Teacher/>
+                        </div>
+                        <div className="lg-device">
+                            <Content/>
+                        </div>
+                        <Course/>
                     </div>
-                    <div className="sm-player">
+                    <div className="col-lg-6 video-player">
                         <div className='player-wrapper bg-white mt-sm-5'>
                             <lite-youtube videoid="-7Fd585bFr8"
                                           playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
                         </div>
-                        <div className={size > 210 ? "about" : "bla"}>
-                            <button className="btn" id="bKash_button">Pay with bKash</button>
-                        </div>
-                        <div className="bg-white sort-details p-4">
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
-                                লেকচার
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
-                                সেশন
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
-                                সময়সীমা
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন ভিত্তিক
-                                ক্লাস (Google Meet)
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর সেশনের
-                                জন্য ৩০ মিনিট
-                            </div>
-                            {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
-                            {/*    ২০২২*/}
-                            {/*</div>*/}
-                            <div className="mt-3">
-                                <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span> <br/>
-                                <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
-                            </div>
+                        <div className="bg-white">
+                            <a href="create-payment"
+                               className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
+                                এনরোল করুন
+                            </a>
                         </div>
                         <div className="bg-white details">
                             <div className="bg-white p-4">
@@ -121,76 +140,36 @@ function HomePage() {
                                     সেশনের
                                     জন্য ৩০ মিনিট
                                 </div>
-                                {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে*/}
-                                {/*    জুন ২০২২*/}
+                                {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
+                                {/*    ২০২২*/}
                                 {/*</div>*/}
-                                <div className="mt-3">
-                                    <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span> <br/>
-                                    <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div className="sm-device">
-                        <Teacher/>
-                    </div>
-                    <div className="lg-device">
-                        <Content/>
-                    </div>
-                    <Course/>
-                </div>
-                <div className="col-lg-6 video-player">
-                    <div className='player-wrapper bg-white mt-sm-5'>
-                        <lite-youtube videoid="-7Fd585bFr8"
-                                      playlabel="Play: Intro AWS Serverless REST API development"></lite-youtube>
-                    </div>
-                    <div className="bg-white">
-                        <button onClick={triggerBkash}>Pay with bKash</button>
-                    </div>
-                    <div className="bg-white details">
-                        <div className="bg-white p-4">
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
-                                লেকচার
+                            <div className="text-end me-5">
+                                <span className="h5">কোর্স ফি: ৩,০০০</span><span className="h2 mb-4">৳</span> <br/>
+                                <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
                             </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
-                                সেশন
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
-                                সময়সীমা
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন ভিত্তিক
-                                ক্লাস (Google Meet)
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর সেশনের
-                                জন্য ৩০ মিনিট
-                            </div>
-                            {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
-                            {/*    ২০২২*/}
-                            {/*</div>*/}
-                        </div>
-                        <div className="text-end me-5">
-                            <span className="h5">কোর্স ফি: ৩,০০০</span><span className="h2 mb-4">৳</span> <br/>
-                            <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div className="sm-device">
-            <Content/>
-        </div>
-        <div className="lg-device lg-device-teacher mt-5">
-            <Teacher/>
-        </div>
-        <div className={size < 210 ? "about" : "bla"}>
-            <div className="fixed-bottom bottom-contact">
-                <a href="create-payment" type="button"
-                   className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
-                    রেজিস্ট্রেশন করুন
-                </a>
+            <div className="sm-device">
+                <Content/>
+            </div>
+            <div className="lg-device lg-device-teacher mt-5">
+                <Teacher/>
+            </div>
+            <div className={size < 210 ? "about" : "bla"}>
+                <div className="fixed-bottom bottom-contact">
+                    <a href="create-payment"
+                       className="btn reg-popup-btn w-100 btn-primary btn-lg mt-4 mb-sm-2">
+                        এনরোল করুন
+                    </a>
+                </div>
             </div>
         </div>
-    </div>);
+
+
+    );
 }
 
 export default HomePage;
