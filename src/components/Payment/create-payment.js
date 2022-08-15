@@ -11,28 +11,37 @@ const SITE_KEY = "6LetAmYeAAAAAPVdEy3rzYYohRzIU5Nr6FHvKCNQ";
 
 function CreatePayment() {
     const Swal = require('sweetalert2')
+    const payment_cancel = {
+        icon: 'error',
+        title: 'Payment Cancellation',
+        text: 'Payment has been canceled by the user',
+        confirmButtonText: 'Close',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        closeOnClickOutside: false
+    }
 
     const {error, loading, triggerBkash} = useBkash({
         onSuccess: (data) => {
+            // this.onClose()
             console.log(data); // this contains data from api response from onExecutePayment
-            window.open("https://dev.learning.fractalslab.com/success", "_blank");
+            if (data.errorMessage)
+                window.open("/failure?errorMessage="+data.errorMessage,"_self")
+            else
+                window.open("/success","_self")
         }, onClose: () => {
-            Swal.fire({
-                icon: 'error',
-                title: 'Payment Cancellation',
-                text: 'Payment has been canceled by the user',
-                confirmButtonText: 'Close',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                closeOnClickOutside: false
-            }).then((result) => {
+
+            Swal.fire(payment_cancel).then((result) => {
                 if (result.isConfirmed) {
                     window.location.reload()
+                    console.log(loading)
                 }
             })
-        }, bkashScriptURL: 'https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
+        },
+        bkashScriptURL: 'https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
 
-        amount: 1000, onCreatePayment: async (paymentRequest) => {
+        amount: 1000,
+        onCreatePayment: async (paymentRequest) => {
             // call your API with the payment request here
             return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/create-payment', {
                 method: 'POST', body: JSON.stringify(paymentRequest),
@@ -41,7 +50,8 @@ function CreatePayment() {
                 // resetSelect();
                 return res.json()
             });
-        }, onExecutePayment: async (paymentID) => {
+        },
+        onExecutePayment: async (paymentID) => {
             // call your executePayment API here
             return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/execute-payment', {
                 method: 'POST', body: JSON.stringify({'paymentID': paymentID}),
@@ -49,7 +59,7 @@ function CreatePayment() {
 
         },
     });
-    console.log(error);
+    console.log(loading);
 
     function resetSelect() {
         setIsOther(false)
