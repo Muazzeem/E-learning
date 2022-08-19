@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
     "cdbreact": "^1.5.3",
+    "dotenv-expand": "^8.0.3",
     "lite-youtube-embed": "^0.2.0",
     "react": "^18.2.0",
     "react-bkash": "^3.0.0",
@@ -29,6 +30,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "aws-deploy": "npm run build && aws s3 sync build/ s3://learning.fractalab.com --delete --cache-control max-age=0",
+    "deploy-prod": "npm run aws-deploy && aws cloudfront create-invalidation --distribution-id=E2E0EJVFMBSRTB --paths /*",
     "aws-deploy-dev": "npm run build && aws s3 sync build/ s3://dev.learning.fractalslab.com --delete --cache-control max-age=0",
     "deploy-dev": "npm run aws-deploy-dev && aws cloudfront create-invalidation --distribution-id=E3088A51DBVY50 --paths '/*'"
   },

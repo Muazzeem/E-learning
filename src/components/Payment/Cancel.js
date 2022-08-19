@@ -4,7 +4,7 @@ import cartoon from "../../images/icon-failed.png";
 function CancelPage() {
 
     return (
-        <div className="container-fluid home">
+        <div className="container-fluid">
             <div className="row justify-content-center">
                 <div className="col-lg-6 col-md-8 col-sm-12">
                     <div className="card payment-card p-3 mb-5 bg-white">

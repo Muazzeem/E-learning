@@ -2,12 +2,14 @@ import './Payment.css';
 import './steper.css'
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import Swal from "sweetalert2";
 import {DotLoader} from "react-spinners";
-import cartoon from "../../images/BKash_Logo_icon-700x662.png";
+import cartoon from "../../images/payment-logo.jpg";
 import {useBkash} from "react-bkash";
 
 const SITE_KEY = "6LetAmYeAAAAAPVdEy3rzYYohRzIU5Nr6FHvKCNQ";
+
+const apiUrl = process.env.NODE_ENV === 'development' ? 'https://api.dev.learning.fractalslab.com' : 'https://api.learning.fractalslab.com';
+console.log(apiUrl)
 
 function CreatePayment() {
     const Swal = require('sweetalert2')
@@ -20,17 +22,25 @@ function CreatePayment() {
         allowEscapeKey: false,
         closeOnClickOutside: false
     }
-
     const {error, loading, triggerBkash} = useBkash({
         onSuccess: (data) => {
-            // this.onClose()
-            console.log(data); // this contains data from api response from onExecutePayment
             if (data.errorMessage)
                 window.open("/failure?errorMessage="+data.errorMessage,"_self")
-            else
-                window.open("/success","_self")
+            else if(data.paymentID){
+                const payementId = JSON.stringify({"paymentID": data.paymentID})
+                axios.post(`${apiUrl}/payment/bkash/query-payment`, payementId).then(res=>{
+                    if (res.data['transactionStatus'] === 'Completed'){
+                        window.open("/success","_self")
+                    }
+                    else {
+                        window.open("/failure?errorMessage=Your+payment+has+not+been+completed","_self")
+                    }
+                })
+            }
+            else {
+                window.open("/failure","_self")
+            }
         }, onClose: () => {
-
             Swal.fire(payment_cancel).then((result) => {
                 if (result.isConfirmed) {
                     window.location.reload()
@@ -43,7 +53,7 @@ function CreatePayment() {
         amount: 1000,
         onCreatePayment: async (paymentRequest) => {
             // call your API with the payment request here
-            return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/create-payment', {
+            return await fetch(`${apiUrl}/payment/bkash/create-payment`, {
                 method: 'POST', body: JSON.stringify(paymentRequest),
             }).then((res) => {
                 console.log(res);
@@ -53,7 +63,7 @@ function CreatePayment() {
         },
         onExecutePayment: async (paymentID) => {
             // call your executePayment API here
-            return await fetch('https://api.dev.learning.fractalslab.com/payment/bkash/execute-payment', {
+            return await fetch(`${apiUrl}/payment/bkash/execute-payment`, {
                 method: 'POST', body: JSON.stringify({'paymentID': paymentID}),
             }).then((res) => res.json());
 
@@ -100,7 +110,7 @@ function CreatePayment() {
             console.log("Script loaded!");
         });
     }, []);
-    const url = "https://api.learning.fractalslab.com/crm/save-contact"
+    const url = `${apiUrl}/crm/save-contact`
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
@@ -112,7 +122,7 @@ function CreatePayment() {
 
 
     function handleClick() {
-        axios.post('https://api.dev.learning.fractalslab.com/crm/save-contact', {headers: {"Content-Type": "application/json"}}).then(res => {
+        axios.post(`${apiUrl}/crm/save-contact`, {headers: {"Content-Type": "application/json"}}).then(res => {
             console.log(res['data']['bkashURL'])
             if (res.status === 200) {
                 // window.open(res['data']['bkashURL']);
@@ -206,7 +216,7 @@ function CreatePayment() {
 
     return (<div className="payment-card mt-50 mb-50">
         <div className="card-title text-center mx-auto">
-            কোর্সটি এনরোল করুন
+            কোর্সটিতে এনরোল করুন
         </div>
         <div className="">
             <span className="mt-4 h5">আপনার তথ্য প্রদান করুন: </span>
@@ -278,7 +288,7 @@ function CreatePayment() {
                                             <img className="bkash-logo" src={cartoon} alt=""/>
                                         </div>
                                     </div>
-                                    <p className="mt-4 h6">সম্পূর্ণ নিরাপদ পেমেন্ট নিশ্চয়তা </p>
+                                    <p className="h6">সম্পূর্ণ নিরাপদ পেমেন্ট নিশ্চয়তা </p>
                                 </label>
                             </div>
                         </div>
@@ -295,12 +305,12 @@ function CreatePayment() {
                                        htmlFor="flexRadioDefault2">
                                     <div className="border-0">
                                         <div className="">
-                                            <p className="h6">অন্যান্য পেমেন্ট এর জন্য যোগাযোগ করুন</p>
-                                            <div className="information">
+                                            <p className="h6 mt-3">অন্যান্য পেমেন্ট এর জন্য যোগাযোগ করুন</p>
+                                            <div className="information mt-2">
                                             <span><i className="far fa-envelope"></i><a
                                                 href="mailto:mr.saiful.azad@gmail.com"> mr.saiful.azad@gmail.com</a></span>
                                             </div>
-                                            <div className="information">
+                                            <div className="information mt-3">
                                             <span><i className="fas fa-phone-alt"></i><a
                                                 href="tel:০১৬৭৬৭৪৩০৭৬"> ০১৬৭৬৭৪৩০৭৬</a></span>
                                             </div>
@@ -314,7 +324,7 @@ function CreatePayment() {
 
                     <div>
                         <button type="submit" disabled={!areAllFieldsFilled || load}
-                                onClick={triggerBkash}
+                                onClick={handleOnClicked}
                                 className="btn payment-button-bkash d-flex mx-auto text-white">
                             <b> কোর্সটি কিনুন </b></button>
 
