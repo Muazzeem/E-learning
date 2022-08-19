@@ -34,7 +34,7 @@ function Teacher() {
                                             প্রোফাইল</a>
                                         <a href="https://www.youtube.com/channel/UCDSgZ1hkrD6lKu1dL7AKIfQ"
                                            target="_blank" rel="noreferrer"
-                                           className="btn social-btn ms-2 btn-floating social-share-link text-white youtube m-1">ইউটিউব
+                                           className="btn btn-danger social-btn ms-2 btn-floating social-share-link text-white youtube m-1">ইউটিউব
                                             চ্যানেল</a>
                                     </div>
                                 </div>

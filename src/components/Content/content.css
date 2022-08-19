@@ -21,7 +21,9 @@ img {
     margin-top: 1rem;
     margin-bottom: 1rem;
 }
-
+.sm-device{
+    margin-bottom: 5rem;
+}
 @media (max-width: 1232px) {
     .service-card {
         height: 650px;
