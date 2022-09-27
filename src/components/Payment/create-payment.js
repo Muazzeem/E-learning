@@ -8,7 +8,7 @@ import {useBkash} from "react-bkash";
 
 const SITE_KEY = "6LetAmYeAAAAAPVdEy3rzYYohRzIU5Nr6FHvKCNQ";
 
-const apiUrl = process.env.NODE_ENV === 'development' ? 'https://api.dev.learning.fractalslab.com' : 'https://api.learning.fractalslab.com';
+const apiUrl = 'https://api.dev.learning.fractalslab.com'
 console.log(process.env.NODE_ENV)
 
 function CreatePayment() {
@@ -22,34 +22,34 @@ function CreatePayment() {
         allowEscapeKey: false,
         closeOnClickOutside: false
     }
+
+    function clearData() {
+        setName("");
+        setEmail("");
+        setPhone("");
+    }
+
     const {error, loading, triggerBkash} = useBkash({
         onSuccess: (data) => {
             console.log(data)
-            if (data.errorMessage)
-                window.open("/failure?errorMessage="+data.errorMessage,"_self")
+            if (data.errorMessage) window.open("/failure?errorMessage=" + data.errorMessage, "_self")
 
-            else if (data.trxID){
-                window.open("/success","_self")
-            }
-
-            else if(data['internal_error']){
+            else if (data.trxID) {
+                window.open("/success", "_self")
+            } else if (data['internal_error']) {
                 const payementId = JSON.stringify({"paymentID": data.paymentID})
-                const token = localStorage.getItem('token')
                 const headers = {
-                      'Content-Type': 'application/json',
-                      'Authorization': token
-                    }
-                axios.post(`${apiUrl}/payment/bkash/query-payment`, payementId, {headers:headers}).then(res=>{
-                    if (res.data['transactionStatus'] === 'Completed'){
-                        window.open("/success","_self")
-                    }
-                    else {
-                        window.open("/failure?errorMessage=Your+payment+has+not+been+completed","_self")
+                    'Content-Type': 'application/json',
+                }
+                axios.post(`${apiUrl}/payment/bkash/query-payment`, payementId, {headers: headers}).then(res => {
+                    if (res.data['transactionStatus'] === 'Completed') {
+                        window.open("/success", "_self")
+                    } else {
+                        window.open("/failure?errorMessage=Your+payment+has+not+been+completed", "_self")
                     }
                 })
-            }
-            else {
-                window.open("/failure","_self")
+            } else {
+                window.open("/failure", "_self")
             }
         }, onClose: () => {
             Swal.fire(payment_cancel).then((result) => {
@@ -58,32 +58,23 @@ function CreatePayment() {
                     console.log(loading)
                 }
             })
-        },
-        bkashScriptURL: 'https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
+        }, bkashScriptURL: 'https://scripts.pay.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout.js', // https://scripts.sandbox.bka.sh/versions/1.2.0-beta/checkout/bKash-checkout-sandbox.js
 
-        amount: 3000,
-        onCreatePayment: async (paymentRequest) => {
-            const token = localStorage.getItem('token')
-            return await fetch(`${apiUrl}/payment/bkash/create-payment`,  {
+        amount: 750, onCreatePayment: async (paymentRequest) => {
+            return await fetch(`${apiUrl}/payment/bkash/create-payment`, {
                 method: 'POST', headers: {
-                    "Authorization": token,
                     "Content-Type": "application/json"
                 }, body: JSON.stringify(paymentRequest),
             }).then((res) => {
-                if (res.status === 200){
+                if (res.status === 200) {
                     return res.json()
-                }else {
-                    Swal.fire('Please login first')
                 }
             });
-        },
-        onExecutePayment: async (paymentID) => {
-            const token = localStorage.getItem('token')
+        }, onExecutePayment: async (paymentID) => {
             return await fetch(`${apiUrl}/payment/bkash/execute-payment`, {
                 method: 'POST', headers: {
-                    "Authorization": token,
                     "Content-Type": "application/json"
-                },body: JSON.stringify({'paymentID': paymentID}),
+                }, body: JSON.stringify({'paymentID': paymentID}),
             }).then((res) => {
                 return res.json()
             });
@@ -213,9 +204,6 @@ function CreatePayment() {
                         .then(res => {
                             console.log(res.status)
                             if (res.status === 200) {
-                                setName("");
-                                setEmail("");
-                                setPhone("");
                                 onClick();
                                 setLoad(false)
                                 if (isOther === true) {
@@ -344,11 +332,11 @@ function CreatePayment() {
                     </div>
                 </div>
 
-                    <div>
-                        <button type="submit" disabled={!areAllFieldsFilled || load}
-                                onClick={handleOnClicked}
-                                className="btn payment-button-bkash d-flex mx-auto text-white">
-                            <b> কোর্সটি কিনুন </b></button>
+                <div>
+                    <button type="submit" disabled={!areAllFieldsFilled || load}
+                            onClick={handleOnClicked}
+                            className="btn payment-button-bkash d-flex mx-auto text-white">
+                        <b> কোর্সটি কিনুন </b></button>
 
                 </div>
             </form>
