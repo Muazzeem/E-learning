@@ -44,54 +44,28 @@ function HomePage() {
                             <PopUpContact/>
                         </div>
                         <div className="bg-white sort-details p-4">
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
+                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ইউটিউব ভিডিও
                                 লেকচার
                             </div>
                             <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
                                 সেশন
                             </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
-                                সময়সীমা
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন ভিত্তিক
-                                ক্লাস (Google Meet)
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর সেশনের
-                                জন্য ৩০ মিনিট
-                            </div>
-                            {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
-                            {/*    ২০২২*/}
-                            {/*</div>*/}
+                            <div className="video-text"><i className="fa-solid fa-check"></i> লাইফ টাইম ভিডিও এক্সেস</div>
                             <div className="mt-3">
-                                <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span> <br/>
-                                <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
-                            </div>
+                                <span className="h5">কোর্স ফি: ৭৫০</span> <span className="h2 mb-4">৳</span> <br/>
+                                </div>
                         </div>
                         <div className="bg-white details">
                             <div className="bg-white p-4">
-                                <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
-                                    লেকচার
-                                </div>
-                                <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
-                                    সেশন
-                                </div>
-                                <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
-                                    সময়সীমা
-                                </div>
-                                <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন
-                                    ভিত্তিক
-                                    ক্লাস (Google Meet)
-                                </div>
-                                <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর
-                                    সেশনের
-                                    জন্য ৩০ মিনিট
-                                </div>
-                                {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে*/}
-                                {/*    জুন ২০২২*/}
-                                {/*</div>*/}
+                                <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ইউটিউব ভিডিও
+                                লেকচার
+                            </div>
+                            <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
+                                সেশন
+                            </div>
+                            <div className="video-text"><i className="fa-solid fa-check"></i> লাইফ টাইম ভিডিও এক্সেস</div>
                                 <div className="mt-3">
-                                    <span className="h5">কোর্স ফি: ৩,০০০</span> <span className="h2 mb-4">৳</span> <br/>
-                                    <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
+                                    <span className="h5">কোর্স ফি: ৭৫০</span> <span className="h2 mb-4">৳</span> <br/>
                                 </div>
                             </div>
                         </div>
@@ -117,28 +91,16 @@ function HomePage() {
                     </div>
                     <div className="bg-white details">
                         <div className="bg-white p-4">
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ভিডিও
+                            <div className="video-text"><i className="fa-solid fa-check"></i> ১০ ঘন্টা ইউটিউব ভিডিও
                                 লেকচার
                             </div>
                             <div className="video-text"><i className="fa-solid fa-check"></i> ৮ টি লেকচার
                                 সেশন
                             </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> ১ মাস কোর্সের
-                                সময়সীমা
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সম্পূর্ণ অনলাইন ভিত্তিক
-                                ক্লাস (Google Meet)
-                            </div>
-                            <div className="video-text"><i className="fa-solid fa-check"></i> সরাসরি প্রশ্নোত্তর সেশনের
-                                জন্য ৩০ মিনিট
-                            </div>
-                            {/*<div className="video-text"><i className="fa-solid fa-check"></i> ক্লাস শুরু হবে ২৫ শে জুন*/}
-                            {/*    ২০২২*/}
-                            {/*</div>*/}
+                            <div className="video-text"><i className="fa-solid fa-check"></i> লাইফ টাইম ভিডিও এক্সেস</div>
                         </div>
                         <div className="text-end me-5">
-                            <span className="h5">কোর্স ফি: ৩,০০০</span><span className="h2 mb-4">৳</span> <br/>
-                            <small>৭ দিনের মানি ব্যাক গ্যারান্টি </small>
+                            <span className="h5">কোর্স ফি: ৭৫০</span><span className="h2 mb-4">৳</span> <br/>
                         </div>
                     </div>
                 </div>
